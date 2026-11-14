@@ -1,0 +1,16 @@
+{
+  "name": "VentureLab \u2014 VC Simulator",
+  "short_name": "VentureLab",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f6f8",
+  "theme_color": "#101827",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

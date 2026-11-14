@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="Learn venture capital by building a virtual startup portfolio.">
+  <title>VentureLab — Learn to invest</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">V</span><span>Venture<span class="muted">Lab</span><small>THE VC SIMULATOR</small></span></a>
+      <div class="nav-label">WORKSPACE</div>
+      <button class="nav active" data-view="overview">▦ <span>Overview</span></button>
+      <button class="nav" data-view="marketplace">⌕ <span>Startup marketplace</span></button>
+      <button class="nav" data-view="portfolio">▤ <span>My portfolio</span></button>
+      <button class="nav" data-view="academy">◇ <span>VC Academy</span></button>
+      <button class="nav" data-view="mentor">✦ <span>AI mentor</span></button>
+      <div class="sidebar-bottom">
+        <div class="level-card"><div class="level-top"><span>YOUR VC LEVEL</span><b id="levelName">Analyst I</b></div><div class="progress"><i id="xpBar"></i></div><small id="xpText">0 / 100 XP to next level</small></div>
+        <button class="reset-link" id="resetBtn">↻ Reset game</button>
+        <p class="side-note">Educational simulation · Virtual money only</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><div class="eyebrow">MONDAY, YOUR FIRST DAY</div><h1 id="pageTitle">Investment overview</h1></div>
+        <div class="top-actions"><span class="status-dot">SIMULATION LIVE</span><div class="avatar">VC</div></div>
+      </header>
+
+      <section id="overview" class="view active">
+        <div class="welcome">
+          <div><div class="eyebrow light">YOUR FUND. YOUR DECISIONS.</div><h2>Welcome to the<br><em>investment desk.</em></h2><p>Find promising founders, ask better questions, and build a portfolio designed for long-term returns.</p><button class="primary" data-go="marketplace">Explore startups <span>→</span></button></div>
+          <div class="welcome-art"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orb-core">VL</div><div class="float-tag tag-one">SEED</div><div class="float-tag tag-two">SERIES A</div><div class="float-tag tag-three">GROWTH</div></div>
+        </div>
+        <div class="metrics">
+          <article class="metric"><div class="metric-head">AVAILABLE CAPITAL <span>◈</span></div><strong id="cashMetric">$10.00M</strong><small>Ready to deploy</small></article>
+          <article class="metric"><div class="metric-head">PORTFOLIO VALUE <span>▥</span></div><strong id="portfolioMetric">$0</strong><small>Current estimated value</small></article>
+          <article class="metric"><div class="metric-head">ACTIVE INVESTMENTS <span>↗</span></div><strong id="investmentsMetric">0</strong><small>Companies backed</small></article>
+          <article class="metric"><div class="metric-head">FUND PERFORMANCE <span>◎</span></div><strong id="multipleMetric">0.00x</strong><small>Portfolio value + cash / initial fund</small></article>
+        </div>
+        <div class="section-heading"><div><div class="eyebrow">THE OPPORTUNITY</div><h3>Today's deal flow</h3></div><button class="text-button" data-go="marketplace">View all startups →</button></div>
+        <div id="featuredGrid" class="startup-grid"></div>
+        <div class="bottom-grid">
+          <article class="panel"><div class="panel-heading"><div><div class="eyebrow">YOUR PROGRESS</div><h3>Investor development</h3></div><span class="pill">LEARNING PATH</span></div><div id="progressItems"></div></article>
+          <article class="panel quote-panel"><div class="quote-mark">“</div><p id="dailyTip">Venture capital is a portfolio business. One great outcome can matter, but disciplined decisions matter every time.</p><small>THE VC FIELD NOTES · DAILY PRINCIPLE</small></article>
+        </div>
+      </section>
+
+      <section id="marketplace" class="view">
+        <div class="intro-row"><div><div class="eyebrow">DEAL FLOW</div><h2>Find the next breakout.</h2><p>Review founder pitches and decide which companies deserve a closer look.</p></div><button class="primary" id="generateBtn">✦ Generate new startups</button></div>
+        <div class="filter-row"><div class="search-box">⌕ <input id="searchInput" placeholder="Search startups or industries..."></div><select id="sectorFilter"><option value="All">All industries</option><option>AI & Software</option><option>Healthcare</option><option>Climate</option><option>Fintech</option><option>Consumer</option><option>Education</option></select></div>
+        <div id="marketGrid" class="startup-grid"></div>
+      </section>
+
+      <section id="portfolio" class="view">
+        <div class="intro-row"><div><div class="eyebrow">FUND MANAGEMENT</div><h2>Your investment portfolio.</h2><p>Track ownership, paper value, and available capital.</p></div><div class="fund-total"><small>AVAILABLE CAPITAL</small><strong id="cashPortfolio">$10.00M</strong></div></div>
+        <div class="metrics compact"><article class="metric"><div class="metric-head">INVESTED CAPITAL</div><strong id="investedMetric">$0</strong></article><article class="metric"><div class="metric-head">PAPER VALUE</div><strong id="paperMetric">$0</strong></article><article class="metric"><div class="metric-head">UNREALIZED GAIN / LOSS</div><strong id="gainMetric">$0</strong></article></div>
+        <div class="panel table-panel"><div class="panel-heading portfolio-tools"><div><h3>Portfolio companies</h3><span class="pill" id="portfolioCount">0 COMPANIES</span><small id="quarterLabel" class="quarter-label">Quarter 1 · Year 1</small></div><div class="tool-buttons"><button class="small-button" id="exportBtn">Export save</button><button class="small-button" id="importBtn">Import save</button><button class="primary" id="advanceBtn">Advance quarter →</button><input id="importFile" type="file" accept="application/json" hidden></div></div><div id="quarterReport" class="quarter-report" hidden></div><div id="portfolioTable" class="table-wrap"><div class="empty">You haven't made an investment yet. Explore the marketplace to find your first company.</div></div></div>
+      </section>
+
+      <section id="academy" class="view">
+        <div class="intro-row"><div><div class="eyebrow">LEARN BY DOING</div><h2>VC Academy.</h2><p>Build the knowledge to make thoughtful investment decisions.</p></div><div class="pill">SHORT LESSONS · EARN XP</div></div>
+        <div id="lessonGrid" class="lesson-grid"></div>
+      </section>
+
+      <section id="mentor" class="view">
+        <div class="intro-row"><div><div class="eyebrow">YOUR INVESTMENT COACH</div><h2>Ask the VC mentor.</h2><p>A built-in learning assistant that explains core venture concepts and reviews your game decisions.</p></div><span class="mentor-icon">✦</span></div>
+        <div class="mentor-layout"><div class="panel chat-panel"><div class="chat-head"><div class="mentor-avatar">✦</div><div><b>VentureLab Mentor</b><small><span class="online-dot"></span> Learning mode · Available offline</small></div></div><div id="chatMessages" class="chat-messages"><div class="bubble assistant">Welcome to your investment desk. Ask me about valuation, dilution, due diligence, portfolio construction, or your current game. I'll help you understand the reasoning behind each decision.</div></div><form id="mentorForm" class="chat-form"><input id="mentorInput" placeholder="Ask about a VC concept or your portfolio..." autocomplete="off"><button class="primary" type="submit">Send ↑</button></form></div><div class="panel prompts"><div class="eyebrow">QUICK QUESTIONS</div><button data-prompt="Explain pre-money and post-money valuation with an example.">Pre-money vs. post-money</button><button data-prompt="How do I calculate my ownership percentage?">How does ownership work?</button><button data-prompt="What should I look for during due diligence?">Due diligence checklist</button><button data-prompt="Explain dilution in a future funding round.">What is dilution?</button><button data-prompt="Review my portfolio and tell me what I should learn from it.">Review my portfolio</button><div class="notice">This mentor uses a free, built-in knowledge base and game data. It is not a live generative AI service.</div></div></div>
+      </section>
+
+      <footer>VENTURELAB AI <span><a href="privacy.html">Privacy</a> · Educational simulation only. Not investment advice.</span></footer>
+    </main>
+  </div>
+
+  <dialog id="startupDialog" class="modal"><div id="dialogContent"></div><button class="modal-close" id="closeDialog" aria-label="Close">×</button></dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
